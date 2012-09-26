@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <title>backcone tutorial 2(View)</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+  <style type="text/css">
+   #container{ padding:20px; border:1px solid #333; width:400px; }
+   #list-template{ display:none; }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <button>Load</button>
+  <ul id="list">
+  </ul>
+</div>
+ 
+<div id="list-template">
+<li><a href=""></a></li>
+</div>
+
+</body>
+<script type="text/javascript">
+  myModel = new Backbone.Model({
+    data: [
+      {text: 'Google', href: 'http://www.google.com.tw'},
+      {text: 'Facebook', href: 'http://facebook.com'},
+      {text: 'Yahoo', href: 'http://www.yahoo.com.tw'},
+    ]
+  });
+
+  var myView = Backbone.View.extend({
+    initialize: function() {
+      console.log('create view');
+    },
+    el: '#container',
+    events: {
+      "click button": "render"
+    },
+    template: $('#list-template').children(),
+    render: function() {
+      var data = this.model.get('data');
+
+      for(var i = 0, l=data.length; i < l; i++) {
+        var a = this.template.clone().find('a');
+        var li = a.attr('href', data[i].href)
+        li = li.text(data[i].text).end();
+        this.$el.find('ul').append(li);
+      }
+    }
+  });
+
+  var view = new myView({model: myModel});
+</script>
+
+</html>

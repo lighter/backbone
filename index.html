@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title>backcone tutorial 1(Model)</title>
+  <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+  <script type="text/javascript">
+    Person = Backbone.Model.extend({
+      initialize: function() {
+        console.log('hello world');
+        this.on('change:name', function(){
+          console.log(persion.get('name'));
+        });
+      }, 
+      default: {
+        name: 'scott',
+        height: 'unknown'
+      },
+      validate: function(attr) {
+        if (attr.name == 'kenny') {
+          return 'kenny is the founder of babylife';
+        }
+      }
+    });
+
+    //新增model的屬性
+    var person = new Person({name: 'Joe', height: '6 feet'});
+  </script>
+</head>
+<body>
+
+</body>
+</html>

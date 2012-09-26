@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <title>backcone tutorial 3(Router)</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+  <style type="text/css">
+   #container{ padding:20px; border:1px solid #333; width:400px; }
+   #list-template{ display:none; }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+ var myRouter = Backbone.Router.extend({
+  routes: {
+    ":foo": "func1",
+    ":foo/:bar": "func2",
+    "*action": "funcU"
+  },
+  func1: function(p1) {
+    alert('fun1:' + p1);
+  },
+  func2: function(p1, p2) {
+    alert('func2:' + p1 + ',' + p2);
+  },
+  funcU: function(a) {
+    if (a !== '') {
+      alert('funcU:' + a );
+    }
+  }
+ });
+ new myRouter();
+ Backbone.history.start();
+</script>
+
+<a href="#foo2">#foo2</a><br />
+<a href="#foo2/bar2">#foo2/bar2</a><br />
+<a href="#foo2/bar2/2000">#foo2/bar2/2000</a>
+
+</body>
+
+
+</html>
